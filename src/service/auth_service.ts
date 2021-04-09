@@ -1,11 +1,15 @@
 import firebase from "firebase";
+import firebaseApp from "./firebase";
 
-type AuthProvier = 'GoogleAuthProvider' | 'FacebookAuthProvider';
+type AuthProvier = 'GoogleAuthProvider' | 'GithubAuthProvider';
 
-class AuthService {
-    login (providerName: string) {
+export interface IAuthService {
+    login:(params:string | null) => Promise<firebase.auth.UserCredential>
+}
+class AuthService implements IAuthService {
+    login (providerName: string | null) {
         const authProvider = new firebase.auth[`${providerName}AuthProvider` as AuthProvier]();
-        return firebase.auth().signInWithPopup(authProvider);
+        return firebaseApp.auth().signInWithPopup(authProvider);
     }
 }
 

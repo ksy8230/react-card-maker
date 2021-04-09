@@ -1,11 +1,16 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Login from './components/login/login';
+import {IAuthService} from './service/auth_service';
 
-function App() {
+type PropTypes = {
+  authService: IAuthService
+}
+
+function App({authService}:PropTypes) {
   return (
     <div className="App">
-      hi
+      <Login authService={authService} />
     </div>
   );
 }
