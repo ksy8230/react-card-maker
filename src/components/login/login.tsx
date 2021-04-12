@@ -15,7 +15,7 @@ const Login = ({authService}:PropTypes) => {
     }
     return (
         <div>
-            <Header />
+            <Header onLogout={() => null} />
             <section>
                 <h1>Login</h1>
                 <ul>

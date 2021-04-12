@@ -1,9 +1,13 @@
 import React from 'react';
+import styles from './header.module.css';
 
-const Header = () => {
+type PropTypes = {
+    onLogout: () => void;
+}
+const Header = ({onLogout}:PropTypes) => {
     return (
-        <div>
-            Header
+        <div className={styles.header}>
+            {onLogout && <button onClick={onLogout}>Logout</button>}
         </div>
     );
 };
