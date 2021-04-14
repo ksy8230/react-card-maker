@@ -30,14 +30,14 @@ const Login = ({authService}:PropTypes) => {
     useEffect(() => {
         // 로그인 컴포넌트 마운트될 때마다 firebase의 인증상태 관찰자 함수 실행
         // 유저 있나 없나 체크
-        authService.onAuthChange((user:UserType) => {
+        authService.onAuthChange((user:any) => {
             user && goToMaker(user.uid);
         })
     });
 
     return (
         <div>
-            <Header onLogout={() => null} />
+            <Header />
             <section>
                 <h1>Login</h1>
                 <ul>

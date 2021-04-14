@@ -18,7 +18,7 @@ function App({authService}:PropTypes) {
             <Login authService={authService} />
           </Route>
           <Route exact path="/maker">
-            <Maker />
+            <Maker authService={authService} />
           </Route>
         </Switch>
       </BrowserRouter>

@@ -2,12 +2,16 @@ import React from 'react';
 import styles from './header.module.css';
 
 type PropTypes = {
-    onLogout: () => void;
+    onLogout?: () => void;
 }
 const Header = ({onLogout}:PropTypes) => {
     return (
         <div className={styles.header}>
-            {onLogout && <button onClick={onLogout}>Logout</button>}
+            {onLogout && (
+            <button className={styles.logout} onClick={onLogout}>
+                Logout
+            </button>
+            )}
         </div>
     );
 };

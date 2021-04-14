@@ -10,6 +10,7 @@ type OnUserChangedType = {
 export interface IAuthService {
     login:(params:string | null) => Promise<firebase.auth.UserCredential>
     onAuthChange:(params: OnUserChangedType) => void
+    logout:() => void
 }
 class AuthService implements IAuthService {
     login (providerName: string | null) {
@@ -19,9 +20,12 @@ class AuthService implements IAuthService {
 
     onAuthChange(onUserChanged:(user:UserType) => void) {
         firebase.auth().onAuthStateChanged(user => {
-            if(!user) return false;
-            onUserChanged(user)
+            onUserChanged(user!);
         });
+    }
+
+    logout() {
+        firebase.auth().signOut()
     }
 }
 
