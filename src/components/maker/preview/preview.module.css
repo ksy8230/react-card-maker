@@ -1,0 +1,13 @@
+.preview {
+    flex-basis: 50%;
+    background-color: bisque;
+}
+
+.cards {
+    width: 100%;
+    height: 100%;
+    padding: 0.5em 2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
