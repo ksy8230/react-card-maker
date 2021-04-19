@@ -1,21 +1,23 @@
 import React from 'react';
 import styles from './editor.module.css';
-import {CardType} from '../maker';
-import Card from '../card/card';
+import {CardType, NormalizedObjects} from '../maker';
+
 import CardEditForm from '../cardEditForm/cardEditForm';
 import CardAddForm from '../card_add_form/card_add_form';
 
 type PropTypes = {
-    cards : CardType[];
+    cards : NormalizedObjects<CardType>;
     addCard: (card:CardType) => void;
+    updateCard: (card:CardType) => void;
+    deleteCard: (card:CardType) => void;
 }
 
-const Editor = ({cards, addCard}: PropTypes) => {
+const Editor = ({cards, addCard, updateCard, deleteCard}: PropTypes) => {
     return (
         <div className={styles.editor}>
             <h1>Editor</h1>
             {
-                cards.map(card => <CardEditForm card={card} />)
+                Object.keys(cards).map(key => <CardEditForm key={key} card={cards[key]} updateCard={updateCard} deleteCard={deleteCard} />)
             }
             <CardAddForm onAdd={addCard} />
         </div>

@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from '../card/card';
-import { CardType } from '../maker';
+import { CardType, NormalizedObjects } from '../maker';
 import styles from './preview.module.css';
 
 type PropTypes = {
-    cards : CardType[];
+    cards : NormalizedObjects<CardType>;
 }
 
 const Preview = ({cards}: PropTypes) => {
@@ -13,7 +13,7 @@ const Preview = ({cards}: PropTypes) => {
             <h1>Preview</h1>
             <ul className={styles.cards}>
                 {
-                    cards.map(card => <Card card={card} />)
+                    Object.keys(cards).map(key => <Card key={key} card={cards[key]} />)
                 }
             </ul>
         </div>

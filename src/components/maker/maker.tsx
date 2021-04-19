@@ -11,6 +11,10 @@ type PropTypes = {
     authService: IAuthService
 }
 
+export interface NormalizedObjects<T> {
+  [idx: string]: T;
+}
+
 export type CardType = {
   id: string,
   name: string,
@@ -20,12 +24,12 @@ export type CardType = {
   email: string,
   message: string,
   fileName: string,
-  fileURL: string | null
+  fileURL: string | null,
 }
 
 const Maker = ({ authService }: PropTypes) => {
-  const [cards, setCards] = useState([
-    {
+  const [cards, setCards] = useState({
+    '1': {
       id: '1',
       name: 'sy',
       company: 'est',
@@ -34,9 +38,9 @@ const Maker = ({ authService }: PropTypes) => {
       email: 'mollog@email.com',
       message: 'go for it',
       fileName: 'sy',
-      fileURL: null
+      fileURL: null,
     },
-    {
+    '2': {
       id: '2',
       name: 'v',
       company: 'est',
@@ -45,9 +49,9 @@ const Maker = ({ authService }: PropTypes) => {
       email: 'mollog@email.com',
       message: 'go for it',
       fileName: 'sy',
-      fileURL: ''
+      fileURL: '',
     },
-    {
+    '3': {
       id: '3',
       name: 'v2',
       company: 'est',
@@ -56,9 +60,12 @@ const Maker = ({ authService }: PropTypes) => {
       email: 'mollog@email.com',
       message: 'go for it',
       fileName: 'sy',
-      fileURL: ''
+      fileURL: '',
     }
-  ] as CardType[]);
+  } as NormalizedObjects<CardType>);
+
+ 
+
   const history = useHistory();
   const onLogout = () => {
     authService.logout();
@@ -73,14 +80,31 @@ const Maker = ({ authService }: PropTypes) => {
   });
   
   const addCard = (card: CardType) => {
-    const updated = [...cards, card];
-    setCards(updated);
+    setCards((cards) => {
+      const updated = { ...cards };
+      updated[card.id] = card;
+      return updated;
+    });
   };
+  const updateCard = (card: CardType) => {
+    setCards((cards) => {
+      const updated = { ...cards };
+      updated[card.id] = card;
+      return updated;
+    });
+  }
+  const deleteCard =(card: CardType) => {
+    setCards((cards) => {
+      const updated = { ...cards };
+      delete updated[card.id];
+      return updated;
+    });
+  }
   return (
     <section className={styles.maker}>
       <Header onLogout={onLogout} />
       <div className={styles.container}>
-        <Editor cards={cards}  addCard={addCard} />
+        <Editor cards={cards}  addCard={addCard} updateCard={updateCard} deleteCard={deleteCard} />
         <Preview cards={cards} />
       </div>
       <Footer />
