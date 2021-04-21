@@ -9,6 +9,7 @@ import Preview from './preview/preview';
 
 type PropTypes = {
     authService: IAuthService
+    FileInput: React.FunctionComponent
 }
 
 export interface NormalizedObjects<T> {
@@ -27,7 +28,7 @@ export type CardType = {
   fileURL: string | null,
 }
 
-const Maker = ({ authService }: PropTypes) => {
+const Maker = ({ FileInput, authService }: PropTypes) => {
   const [cards, setCards] = useState({
     '1': {
       id: '1',
@@ -104,7 +105,7 @@ const Maker = ({ authService }: PropTypes) => {
     <section className={styles.maker}>
       <Header onLogout={onLogout} />
       <div className={styles.container}>
-        <Editor cards={cards}  addCard={addCard} updateCard={updateCard} deleteCard={deleteCard} />
+        <Editor FileInput={FileInput} cards={cards}  addCard={addCard} updateCard={updateCard} deleteCard={deleteCard} />
         <Preview cards={cards} />
       </div>
       <Footer />

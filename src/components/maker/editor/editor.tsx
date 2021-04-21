@@ -10,16 +10,17 @@ type PropTypes = {
     addCard: (card:CardType) => void;
     updateCard: (card:CardType) => void;
     deleteCard: (card:CardType) => void;
+    FileInput: React.FunctionComponent;
 }
 
-const Editor = ({cards, addCard, updateCard, deleteCard}: PropTypes) => {
+const Editor = ({FileInput, cards, addCard, updateCard, deleteCard}: PropTypes) => {
     return (
         <div className={styles.editor}>
             <h1>Editor</h1>
             {
-                Object.keys(cards).map(key => <CardEditForm key={key} card={cards[key]} updateCard={updateCard} deleteCard={deleteCard} />)
+                Object.keys(cards).map(key => <CardEditForm key={key} FileInput={FileInput} card={cards[key]} updateCard={updateCard} deleteCard={deleteCard} />)
             }
-            <CardAddForm onAdd={addCard} />
+            <CardAddForm FileInput={FileInput} onAdd={addCard} />
         </div>
     );
 };

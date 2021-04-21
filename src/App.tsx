@@ -7,9 +7,10 @@ import Maker from './components/maker/maker';
 
 type PropTypes = {
   authService: IAuthService
+  FileInput: React.FunctionComponent
 }
 
-function App({authService}:PropTypes) {
+function App({FileInput, authService}:PropTypes) {
   return (
     <div className="App">
       <BrowserRouter>
@@ -18,7 +19,7 @@ function App({authService}:PropTypes) {
             <Login authService={authService} />
           </Route>
           <Route exact path="/maker">
-            <Maker authService={authService} />
+            <Maker FileInput={FileInput} authService={authService} />
           </Route>
         </Switch>
       </BrowserRouter>

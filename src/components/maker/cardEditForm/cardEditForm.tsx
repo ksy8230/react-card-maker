@@ -8,9 +8,10 @@ type PropTypes = {
     card : CardType;
     updateCard: (card:CardType) => void;
     deleteCard: (card:CardType) => void;
+    FileInput: React.FunctionComponent;
 }
 
-const CardEditForm = ({card, updateCard, deleteCard}: PropTypes) => {
+const CardEditForm = ({FileInput, card, updateCard, deleteCard}: PropTypes) => {
     const {name, company, title, email, message, theme, fileName, fileURL} = card;
     const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         if(event.currentTarget == null) {
@@ -40,7 +41,7 @@ const CardEditForm = ({card, updateCard, deleteCard}: PropTypes) => {
             <input className={styles.input} type="text" name="email" value={email} onChange={onChange} />
             <textarea className={styles.textarea} name="message" value={message} onChange={onChange} />
             <div className={styles.fileInput}>
-                <ImageFileInput />
+                <FileInput />
             </div>
             <Button name="Delete" onClick={onSubmit} />
         </form>
