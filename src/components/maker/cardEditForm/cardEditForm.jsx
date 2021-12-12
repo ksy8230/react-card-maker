@@ -1,19 +1,27 @@
 import React, { SyntheticEvent } from 'react';
 import styles from './card_edit_form.module.css';
 import Button from '../../button/button';
-import ImageFileInput from '../image_file_input/image_file_input';
+
 import { CardType, NormalizedObjects } from '../maker';
 
-type PropTypes = {
-    card : CardType;
-    updateCard: (card:CardType) => void;
-    deleteCard: (card:CardType) => void;
-    FileInput: React.FunctionComponent;
-}
+// type PropTypes = {
+//     card : CardType;
+//     updateCard: (card:CardType) => void;
+//     deleteCard: (card:CardType) => void;
+//     FileInput: React.FunctionComponent;
+// }
 
-const CardEditForm = ({FileInput, card, updateCard, deleteCard}: PropTypes) => {
+const CardEditForm = ({FileInput, card, updateCard, deleteCard}) => {
     const {name, company, title, email, message, theme, fileName, fileURL} = card;
-    const onChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const onFileChage = (file) => {
+        console.log(file);
+        updateCard({
+            ...card,
+            fileName: file.name,
+            fileURL: file.url,
+        });
+    }
+    const onChange = (event) => {
         if(event.currentTarget == null) {
             return;
         }
@@ -41,7 +49,7 @@ const CardEditForm = ({FileInput, card, updateCard, deleteCard}: PropTypes) => {
             <input className={styles.input} type="text" name="email" value={email} onChange={onChange} />
             <textarea className={styles.textarea} name="message" value={message} onChange={onChange} />
             <div className={styles.fileInput}>
-                <FileInput />
+                <FileInput onFileChange={onFileChage} />
             </div>
             <Button name="Delete" onClick={onSubmit} />
         </form>
